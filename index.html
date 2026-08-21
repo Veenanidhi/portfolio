@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veena A S — Java Backend Developer</title>
+<meta name="description" content="Veena A S — Fresher Java Backend Developer. Spring Boot, React, MySQL, Docker, AWS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F14;
+    --panel:#111823;
+    --panel-2:#0E1520;
+    --line-dark:#232B36;
+    --text-on-dark:#E7ECF3;
+    --text-on-dark-soft:#8A95A5;
+
+    --paper:#EEF1F5;
+    --paper-2:#E4E8EF;
+    --line:#D7DCE3;
+    --ink:#0B0F14;
+    --ink-soft:#525A66;
+
+    --blue:#4C8EFF;
+    --blue-dim:#2F5FC7;
+    --green:#3FB950;
+    --amber:#E3B341;
+
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--blue); outline-offset:3px;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .display{font-family:'Space Grotesk',sans-serif;}
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 28px;
+    background:var(--panel);
+    border-bottom:1px solid var(--line-dark);
+    height:52px;
+  }
+  .nav-tabs{display:flex; height:100%;}
+  .nav-tab{
+    display:flex; align-items:center; gap:8px;
+    padding:0 18px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    color:var(--text-on-dark-soft);
+    text-decoration:none;
+    border-right:1px solid var(--line-dark);
+    height:100%;
+    transition:color .2s, background .2s;
+  }
+  .nav-tab .dot{width:6px;height:6px;border-radius:50%;background:var(--text-on-dark-soft); transition:background .2s;}
+  .nav-tab:hover{color:var(--text-on-dark); background:var(--panel-2);}
+  .nav-tab:hover .dot{background:var(--amber);}
+  .nav-tab.active{color:var(--text-on-dark); background:var(--bg);}
+  .nav-tab.active .dot{background:var(--green);}
+  .nav-right{display:flex; align-items:center; gap:14px;}
+  .nav-resume{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; font-weight:500;
+    color:var(--bg);
+    background:var(--green);
+    padding:7px 16px;
+    border-radius:6px;
+    text-decoration:none;
+    display:flex; align-items:center; gap:6px;
+    transition:transform .2s, background .2s;
+  }
+  .nav-resume:hover{background:#5CE066; transform:translateY(-1px);}
+  @media (max-width:800px){ .nav-tabs{display:none;} }
+
+  /* ===== HERO ===== */
+  .hero{
+    background:var(--bg);
+    color:var(--text-on-dark);
+    padding:80px 28px 100px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:50px;
+    align-items:start;
+  }
+  .terminal{
+    background:var(--panel);
+    border:1px solid var(--line-dark);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 30px 70px rgba(0,0,0,0.45);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px;
+    background:var(--panel-2);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .tb-dot{width:10px;height:10px;border-radius:50%;}
+  .tb-dot.r{background:#F2545B;} .tb-dot.y{background:var(--amber);} .tb-dot.g{background:var(--green);}
+  .terminal-title{
+    margin-left:8px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-on-dark-soft);
+  }
+  .terminal-body{padding:26px 26px 30px; font-family:'JetBrains Mono',monospace; font-size:14px; line-height:1.9;}
+  .t-prompt{color:var(--green);}
+  .t-cmd{color:var(--text-on-dark);}
+  .t-line{color:var(--text-on-dark-soft); white-space:pre-wrap;}
+  .t-hl{color:var(--amber);}
+  .t-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(30px,4vw,42px);
+    font-weight:700;
+    color:var(--text-on-dark);
+    margin:14px 0 4px;
+    letter-spacing:-0.5px;
+  }
+  .t-role{color:var(--blue); font-size:15px; margin-bottom:18px;}
+  .t-desc{color:var(--text-on-dark-soft); font-size:13.5px; line-height:1.8; max-width:520px; margin-bottom:22px;}
+  .cursor-blink{
+    display:inline-block; width:8px; height:16px; background:var(--green);
+    animation:blink 1s step-end infinite; vertical-align:middle;
+  }
+  @keyframes blink{ 50%{opacity:0;} }
+  .t-ctas{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:500;
+    padding:11px 20px; border-radius:7px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .2s, background .2s, border-color .2s;
+  }
+  .btn-primary{background:var(--blue); color:#fff;}
+  .btn-primary:hover{background:var(--blue-dim); transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--line-dark); color:var(--text-on-dark);}
+  .btn-ghost:hover{border-color:var(--blue); color:var(--blue); transform:translateY(-2px);}
+
+  /* status panel */
+  .status-panel{
+    background:var(--panel);
+    border:1px solid var(--line-dark);
+    border-radius:var(--radius);
+    padding:20px;
+  }
+  .status-head{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--text-on-dark-soft); margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--line-dark);
+  }
+  .svc{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 4px; border-bottom:1px solid var(--line-dark);
+    font-family:'JetBrains Mono',monospace; font-size:12.5px;
+  }
+  .svc:last-child{border-bottom:none;}
+  .svc-name{display:flex; align-items:center; gap:10px; color:var(--text-on-dark);}
+  .svc-dot{width:7px;height:7px;border-radius:50%; background:var(--green); animation:pulse 2s ease infinite;}
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+  .svc-status{color:var(--green); font-size:11px;}
+  .loc-line{
+    margin-top:16px; padding-top:14px; border-top:1px solid var(--line-dark);
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--text-on-dark-soft);
+    display:flex; justify-content:space-between;
+  }
+  @media (max-width:900px){ .hero{grid-template-columns:1fr; padding:60px 20px 70px;} }
+
+  /* ===== SECTION SHELL ===== */
+  section.block{padding:100px 28px;}
+  .shell{max-width:1080px; margin:0 auto;}
+  .route{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;
+    color:var(--green); background:rgba(63,185,80,0.1);
+    border:1px solid rgba(63,185,80,0.3);
+    padding:5px 12px; border-radius:6px; margin-bottom:20px;
+  }
+  .route .method{color:var(--blue);}
+  h2.block-title{
+    font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:clamp(28px,3.4vw,42px); letter-spacing:-1px; line-height:1.15;
+    margin-bottom:44px; max-width:640px;
+  }
+  @media (max-width:800px){ section.block{padding:70px 20px;} }
+
+  /* ===== ABOUT ===== */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  .about-copy p{font-size:15.5px; line-height:1.85; color:var(--ink-soft); margin-bottom:18px;}
+  .about-copy strong{color:var(--ink); font-weight:600;}
+  .changelog{border-left:2px solid var(--line);}
+  .cl-item{position:relative; padding:0 0 30px 26px;}
+  .cl-item:last-child{padding-bottom:0;}
+  .cl-item::before{
+    content:''; position:absolute; left:-6px; top:4px;
+    width:10px; height:10px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--blue);
+  }
+  .cl-version{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--blue); font-weight:600; margin-bottom:4px;}
+  .cl-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px; margin-bottom:6px;}
+  .cl-desc{font-size:13.5px; color:var(--ink-soft); line-height:1.7;}
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+
+  /* ===== SKILLS ===== */
+  .skills-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  .skill-group{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px;
+  }
+  .sg-key{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--blue-dim); margin-bottom:14px; font-weight:600;}
+  .sg-key::before{content:'"'; } .sg-key::after{content:'": ['; }
+  .sg-chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .schip{
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    background:var(--paper-2); border:1px solid var(--line); border-radius:6px;
+    padding:6px 11px; color:var(--ink);
+  }
+  @media (max-width:700px){ .skills-groups{grid-template-columns:1fr;} }
+
+  /* ===== PROJECTS ===== */
+  .proj-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:32px; margin-bottom:20px;
+    transition:transform .25s, box-shadow .25s;
+  }
+  .proj-card:hover{transform:translateY(-4px); box-shadow:0 24px 50px rgba(11,15,20,0.08);}
+  .proj-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:14px; margin-bottom:14px;}
+  .proj-route{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:600;
+    padding:4px 10px; border-radius:5px;
+  }
+  .rt-post{background:rgba(76,142,255,0.12); color:var(--blue-dim);}
+  .rt-get{background:rgba(63,185,80,0.12); color:#2A8F3E;}
+  .rt-put{background:rgba(227,179,65,0.15); color:#9A7515;}
+  .proj-name{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; margin-bottom:8px;}
+  .proj-desc{font-size:14.5px; line-height:1.75; color:var(--ink-soft); margin-bottom:18px; max-width:680px;}
+  .proj-tech{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:18px;}
+  .ttag{font-family:'JetBrains Mono',monospace; font-size:11px; background:var(--paper-2); border:1px solid var(--line); border-radius:5px; padding:4px 9px; color:var(--ink-soft);}
+  .proj-links{display:flex; gap:10px;}
+  .plink{
+    font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500;
+    text-decoration:none; padding:8px 16px; border-radius:6px;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .plink-live{background:var(--ink); color:#fff;}
+  .plink-live:hover{background:var(--blue-dim);}
+  .plink-code{border:1px solid var(--line); color:var(--ink);}
+  .plink-code:hover{border-color:var(--ink);}
+
+  /* ===== CONTACT ===== */
+  .contact-block{background:var(--bg); color:var(--text-on-dark); text-align:center;}
+  .contact-block .route{color:var(--blue); background:rgba(76,142,255,0.1); border-color:rgba(76,142,255,0.3);}
+  .contact-block h2{color:var(--text-on-dark); margin-left:auto; margin-right:auto;}
+  .prompt-box{
+    max-width:640px; margin:0 auto;
+    background:var(--panel); border:1px solid var(--line-dark); border-radius:var(--radius);
+    padding:30px 28px; font-family:'JetBrains Mono',monospace; font-size:14px; text-align:left;
+    line-height:2;
+  }
+  .contact-ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:36px;}
+
+  /* ===== FOOTER (status bar) ===== */
+  footer{
+    background:var(--panel); color:var(--text-on-dark-soft);
+    border-top:1px solid var(--line-dark);
+    padding:10px 24px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:11.5px;
+  }
+  footer span.ok{color:var(--green);}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-tabs">
+    <a href="#about" class="nav-tab"><span class="dot"></span>about.java</a>
+    <a href="#stack" class="nav-tab"><span class="dot"></span>stack.json</a>
+    <a href="#projects" class="nav-tab"><span class="dot"></span>projects.java</a>
+    <a href="#contact" class="nav-tab"><span class="dot"></span>contact.java</a>
+  </div>
+  <div class="nav-right">
+    <!-- TODO: replace with your actual resume PDF link once uploaded -->
+    <a href="resume.pdf" class="nav-resume" download>⬇ resume.pdf</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="tb-dot r"></span><span class="tb-dot y"></span><span class="tb-dot g"></span>
+      <span class="terminal-title">veena@portfolio: ~</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">$</span> <span class="t-cmd">whoami</span></div>
+      <div class="t-name">Veena A S</div>
+      <div class="t-role">Java Backend Developer <span class="t-hl">// building backend systems that ship</span></div>
+      <div><span class="t-prompt">$</span> <span class="t-cmd">cat about.txt</span></div>
+      <p class="t-desc">
+        I build backend systems with Java and Spring Boot, wire them up to React front ends, and ship them on AWS.
+        Came into software from a Zoology degree — the same habit of careful observation now goes into debugging and API design.
+        Based in Thiruvananthapuram, open to relocation.
+      </p>
+      <span class="cursor-blink"></span>
+      <div class="t-ctas" style="margin-top:20px;">
+        <a href="https://github.com/Veenanidhi?tab=repositories" class="btn btn-primary" target="_blank" rel="noopener">→ View Projects</a>
+        <a href="mailto:veenaasjune22@gmail.com" class="btn btn-ghost">Say Hello</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-panel">
+    <div class="status-head">// stack status</div>
+    <div class="svc"><span class="svc-name"><span class="svc-dot"></span>Java</span><span class="svc-status">core</span></div>
+    <div class="svc"><span class="svc-name"><span class="svc-dot"></span>Spring Boot</span><span class="svc-status">running</span></div>
+    <div class="svc"><span class="svc-name"><span class="svc-dot"></span>React.js</span><span class="svc-status">running</span></div>
+    <div class="svc"><span class="svc-name"><span class="svc-dot"></span>MySQL</span><span class="svc-status">connected</span></div>
+    <div class="svc"><span class="svc-name"><span class="svc-dot"></span>Docker</span><span class="svc-status">building</span></div>
+    <div class="svc"><span class="svc-name"><span class="svc-dot"></span>AWS</span><span class="svc-status">deployed</span></div>
+    <div class="svc"><span class="svc-name"><span class="svc-dot"></span>Postman</span><span class="svc-status">testing</span></div>
+    <div class="svc"><span class="svc-name"><span class="svc-dot"></span>Microservices</span><span class="svc-status">running</span></div>
+    <div class="svc"><span class="svc-name"><span class="svc-dot"></span>AI Engineering</span><span class="svc-status">exploring</span></div>
+    <div class="loc-line">
+      <span>Thiruvananthapuram, IN</span>
+      <span style="color:var(--green);">● open to work</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="block" id="about">
+  <div class="shell reveal">
+    <div class="route"><span class="method">GET</span> /about</div>
+    <h2 class="block-title">From counting cells to counting API calls.</h2>
+    <div class="about-grid">
+      <div class="about-copy">
+        <p>
+          I started in <strong>Zoology</strong>, not code — a degree built on patient observation and pattern recognition.
+          That same discipline is what now makes me good at tracing a bug through a stack trace or reasoning through
+          a database schema.
+        </p>
+        <p>
+          I've built full-stack projects end to end: <strong>Java + Spring Boot</strong> on the backend,
+          <strong>React</strong> on the front end, <strong>MySQL</strong> for persistence, and <strong>Docker/AWS</strong>
+          for shipping it somewhere real.
+        </p>
+      </div>
+      <div class="changelog">
+        <div class="cl-item">
+          <div class="cl-version">v1.0 · 2019–2022</div>
+          <div class="cl-title">BSc Zoology</div>
+          <div class="cl-desc">VTM NSS College, Dhanuvachapuram. Built a foundation in structured, evidence-based thinking.</div>
+        </div>
+        <div class="cl-item">
+          <div class="cl-version">v2.0</div>
+          <div class="cl-title">Java Developer Trainee, HulkHire</div>
+          <div class="cl-desc">Built a payment integration system using microservice architecture — first hands-on production-style backend work.</div>
+        </div>
+        <div class="cl-item">
+          <div class="cl-version">v3.0 · current</div>
+          <div class="cl-title">Java Backend Developer</div>
+          <div class="cl-desc">Shipping full-stack projects with Spring Boot, React, MySQL, Docker and AWS. Actively interviewing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="block" id="stack" style="background:var(--paper-2);">
+  <div class="shell reveal">
+    <div class="route"><span class="method">GET</span> /stack</div>
+    <h2 class="block-title">stack.json</h2>
+    <div class="skills-groups">
+      <div class="skill-group">
+        <div class="sg-key">languages</div>
+        <div class="sg-chips">
+          <span class="schip">Java</span>
+          <span class="schip">JavaScript</span>
+          <span class="schip">SQL</span>
+          <span class="schip">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-key">frameworks</div>
+        <div class="sg-chips">
+          <span class="schip">Spring Boot</span>
+          <span class="schip">React.js</span>
+          <span class="schip">REST APIs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-key">data</div>
+        <div class="sg-chips">
+          <span class="schip">MySQL</span>
+          <span class="schip">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-key">tools_and_cloud</div>
+        <div class="sg-chips">
+          <span class="schip">Docker</span>
+          <span class="schip">AWS</span>
+          <span class="schip">Postman</span>
+          <span class="schip">GitHub</span>
+          <span class="schip">Git</span>
+          <span class="schip">IntelliJ IDEA</span>
+          <span class="schip">VS Code</span>
+          <span class="schip">GitLab</span>
+          <span class="schip">Jira</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="block" id="projects">
+  <div class="shell reveal">
+    <div class="route"><span class="method">GET</span> /projects</div>
+    <h2 class="block-title">Projects that hit the database, not just the mockup.</h2>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <span class="proj-route rt-post">POST /payments</span>
+      </div>
+      <div class="proj-name">Payment Integration System</div>
+      <p class="proj-desc">
+        Built as a Java Developer Trainee at HulkHire. A payment integration system designed around microservice
+        architecture — separate services for transaction processing, validation, and status tracking, communicating
+        over REST.
+      </p>
+      <div class="proj-tech">
+        <span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">Microservices</span>
+        <span class="ttag">MySQL</span><span class="ttag">REST APIs</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/Veenanidhi/payment-integration-system" class="plink plink-code">⌥ View Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <div>
+          <span class="proj-route rt-post">POST /checkout</span>
+        </div>
+      </div>
+      <div class="proj-name">Witcher — E-Commerce Platform</div>
+      <p class="proj-desc">
+        Full-stack e-commerce app with product listings, cart, and multi-step checkout. Backend built on Spring Boot
+        with a MySQL data layer; Razorpay integrated for payments with proper error-state handling.
+      </p>
+      <div class="proj-tech">
+        <span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">React.js</span>
+        <span class="ttag">MySQL</span><span class="ttag">Razorpay API</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/Veenanidhi?tab=repositories" class="plink plink-code">⌥ View Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <span class="proj-route rt-get">GET /tasks</span>
+      </div>
+      <div class="proj-name">Task Manager — To-Do App</div>
+      <p class="proj-desc">
+        A task management app with priority tagging, completion tracking, and filterable views. REST endpoints
+        built with Spring Boot, persisted to MySQL, consumed by a React front end.
+      </p>
+      <div class="proj-tech">
+        <span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">React.js</span>
+        <span class="ttag">MySQL</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/Veenanidhi?tab=repositories" class="plink plink-code">⌥ View Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <span class="proj-route rt-put">PUT /session</span>
+      </div>
+      <div class="proj-name">Basic Login Application</div>
+      <p class="proj-desc">
+        Authentication flow covering signup, login, and session handling — the fundamentals done properly:
+        validation, password handling, and clean error responses from the API layer.
+      </p>
+      <div class="proj-tech">
+        <span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">MySQL</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/Veenanidhi?tab=repositories" class="plink plink-code">⌥ View Code</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="block contact-block" id="contact">
+  <div class="shell reveal">
+    <div class="route"><span class="method">POST</span> /contact</div>
+    <h2 class="block-title">Let's build something that ships.</h2>
+    <div class="prompt-box">
+      <div><span class="t-prompt">$</span> <span class="t-cmd">curl -X POST /contact \</span></div>
+      <div class="t-line">&nbsp;&nbsp;--data email=<span class="t-hl">veenaasjune22@gmail.com</span></div>
+      <div class="t-line">&nbsp;&nbsp;--data location=<span class="t-hl">"Thiruvananthapuram, Kerala"</span></div>
+      <div class="t-line">&nbsp;&nbsp;--data status=<span style="color:var(--green);">"open_to_work"</span></div>
+    </div>
+    <div class="contact-ctas">
+      <a href="mailto:veenaasjune22@gmail.com" class="btn btn-primary">Email Me</a>
+      <a href="https://www.linkedin.com/in/veena-as-4420562a0" class="btn btn-ghost">LinkedIn</a>
+      <a href="https://github.com/Veenanidhi" class="btn btn-ghost">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Ln 1, Col 1 · UTF-8 · Java · Spring Boot</span>
+  <span class="ok">● Open to work — Thiruvananthapuram, Kerala</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); } });
+  }, {threshold:0.15});
+  reveals.forEach(r=>io.observe(r));
+
+  // active nav tab on scroll
+  const sections = ['about','stack','projects','contact'].map(id=>document.getElementById(id));
+  const tabs = document.querySelectorAll('.nav-tab');
+  const navIO = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        tabs.forEach(t=>t.classList.remove('active'));
+        const match = document.querySelector(`.nav-tab[href="#${entry.target.id}"]`);
+        if(match) match.classList.add('active');
+      }
+    });
+  }, {threshold:0.5});
+  sections.forEach(s=> s && navIO.observe(s));
+</script>
+
+</body>
+</html>
